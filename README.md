@@ -3,7 +3,10 @@ tool for upload/install plugin automatic for bulk wordpress website
 [Work 95%]
 
 ## What is?
+<pre>
 this tool for defacement, used for install a plugin including a shell and uploader inside
+password fo shell is : monkey
+</pre>
 
 ## how to use
 - Clone or download script
